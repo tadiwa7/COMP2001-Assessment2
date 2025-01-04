@@ -1,0 +1,153 @@
+openapi: 3.0.0
+info:
+  title: "TrailService Flask REST API"
+  description: "An API to manage trails in the TrailService microservice."
+  version: "1.0.0"
+
+servers:
+  - url: /api
+    description: API base path
+
+paths:
+  /trails:
+    get:
+      summary: Get all trails
+      operationId: trails.get_trails
+      responses:
+        200:
+          description: List of all trails
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trail'
+    post:
+      summary: Create a new trail
+      operationId: trails.create_trail
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trail'
+      responses:
+        201:
+          description: Trail successfully created
+
+  /trails/{trail_id}:
+    get:
+      summary: Get a trail by ID
+      operationId: trails.get_trail
+      parameters:
+        - name: trail_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Details of a specific trail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trail'
+        404:
+          description: Trail not found
+    put:
+      summary: Update a trail by ID
+      operationId: trails.update_trail
+      parameters:
+        - name: trail_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trail'
+      responses:
+        200:
+          description: Trail successfully updated
+    delete:
+      summary: Delete a trail by ID
+      operationId: trails.delete_trail
+      parameters:
+        - name: trail_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Trail successfully deleted
+
+components:
+  schemas:
+    Trail:
+      type: object
+      properties:
+        TrailID:
+          type: integer
+        Trail_name:
+          type: string
+        Trail_summary:
+          type: string
+        Trail_description:
+          type: string
+        Difficulty:
+          type: string
+        Location:
+          type: string
+        Length:
+          type: number
+          format: float
+        Elevation_gain:
+          type: integer
+        Route_type:
+          type: string
+        OwnerID:
+          type: integer
+        Pt1_Lat:
+          type: number
+          format: double
+        Pt1_Long:
+          type: number
+          format: double
+        Pt1_Desc:
+          type: string
+        Pt2_Lat:
+          type: number
+          format: double
+        Pt2_Long:
+          type: number
+          format: double
+        Pt2_Desc:
+          type: string
+        Pt3_Lat:
+          type: number
+          format: double
+        Pt3_Long:
+          type: number
+          format: double
+        Pt3_Desc:
+          type: string
+        Pt4_Lat:
+          type: number
+          format: double
+        Pt4_Long:
+          type: number
+          format: double
+        Pt4_Desc:
+          type: string
+        Pt5_Lat:
+          type: number
+          format: double
+        Pt5_Long:
+          type: number
+          format: double
+        Pt5_Desc:
+          type: string
